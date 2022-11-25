@@ -1,7 +1,9 @@
 import User from "../models/userModel.js";
 import createError from "http-errors";
+import lodash from 'lodash'
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken"
+const { omit } = lodash
 
 /*
 * @author Prafful Bansal
@@ -12,10 +14,8 @@ export const createUser = async (input) => {
 
         const user = await User.create(input);
 
-        // masking password
-        user.password = undefined;
+        return omit(user.toJSON(), "password")
 
-        return user;
     } catch (error) {
         throw error;
     }
@@ -51,12 +51,10 @@ export const userLogin = async (input) => {
   
         const token = jwt.sign(payload, secret, expiry);
   
-        // masking user password
-        user.password = undefined;
-  
-        const obj = { token: token, user: user };
+        const obj = {token: token, user : omit(user.toJSON(), "password")};
         
         return obj;
+
     } catch (error) {
       throw error;
     }

@@ -3,6 +3,7 @@ import createError from "http-errors";
 import dotenv from "dotenv";
 import Database from "../src/db/db.js";
 import userRouter from "./routes/userRoute.js";
+import notesRouter from "./routes/notesRoute.js";
 
 // dotenv configuration
 dotenv.config();
@@ -23,6 +24,9 @@ Database.init();
 
 // diverting user request to user router
 app.use("/user", userRouter);
+
+// diverting notes request to notes router
+app.use("/notes", notesRouter);
 
 // checking invalid route
 app.use(async (req, res, next) => {

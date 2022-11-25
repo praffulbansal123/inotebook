@@ -1,4 +1,5 @@
 import { registerUserSchema, loginUserSchema } from '../joiSchema/userJoi.js'
+import { createNotesSchema, notesUpdateSchema } from '../joiSchema/notesJoi.js'
 
 /*
 * @author Prafful Bansal
@@ -28,5 +29,15 @@ export const createUserSchema = (req, res, next) => {
 
 export const loginSchema = (req, res, next) => {
     const schema = loginUserSchema
+    requestValidator(req, next, schema);
+}
+
+export const addNotesSchema = (req, res, next) => {
+    const schema = createNotesSchema
+    requestValidator(req, next, schema);
+}
+
+export const updateNotesSchema = (req, res, next) => {
+    const schema = notesUpdateSchema
     requestValidator(req, next, schema);
 }
