@@ -2,6 +2,7 @@ import express from "express";
 import createError from "http-errors";
 import dotenv from "dotenv";
 import Database from "../src/db/db.js";
+import userRouter from "./routes/userRoute.js";
 
 // dotenv configuration
 dotenv.config();
@@ -20,10 +21,8 @@ app.use(express.urlencoded({ extended: true }));
 // Database initialized
 Database.init();
 
-// Testing Route
-app.use("/test", function (req, res) {
-    res.send({ status: true, message: "test-api working fine" });
-});
+// diverting user request to user router
+app.use("/user", userRouter);
 
 // checking invalid route
 app.use(async (req, res, next) => {
@@ -31,9 +30,9 @@ app.use(async (req, res, next) => {
 });
   
 // Intializing error-handling
-app.use((err, req, res, next) => {
-    res.status(err.status || 500);
-    res.send({ status: false, status1: err.status || 500, mssg: err.message });
+app.use((error, req, res, next) => {
+    res.status(error.status || 500);
+    res.send({ status: false, statusCode: error.status || 500, message: error.message });
 });
   
 export default app;
