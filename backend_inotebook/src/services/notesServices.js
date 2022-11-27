@@ -34,9 +34,6 @@ export const getNotes = async (userId) => {
 
         const notes = await Notes.find({user: userId});
 
-        if(notes.length===0)
-            throw createError.NotFound('No notes for user exits')
-
         return notes;
 
     } catch (error) {

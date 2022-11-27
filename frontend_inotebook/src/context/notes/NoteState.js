@@ -2,20 +2,21 @@ import NoteContext from "./noteContext";
 import { useState } from "react";
 
 const NoteState = (props) => {
-  const host = "http://localhost:8000"
+  const host = process.env.REACT_APP_API_URL
 
   const [notes, setNotes] = useState([]);
-
+  const token = process.env.REACT_APP_TOKEN_KEY
+  
   // Get all notes
   const getNote = async () => {
-
+    
     // get notes(GET) API call
     const url = `${host}/notes/get`
     const response = await fetch(url, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer '+'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzdmMWM3MjA5NjMwMzhjZjVkOTA4OWYiLCJpYXQiOjE2Njk1Mjk0MzAsImV4cCI6MTY2OTUzMzAzMH0.sbcxKGHXyJG5oDcvQhojF4mbgdVAKeK5VsviG-vsHCg',
+        'Authorization': 'Bearer '+token,
       }
     });
     const json = await response.json()
@@ -33,7 +34,7 @@ const NoteState = (props) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer '+'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzdmMWM3MjA5NjMwMzhjZjVkOTA4OWYiLCJpYXQiOjE2Njk1Mjk0MzAsImV4cCI6MTY2OTUzMzAzMH0.sbcxKGHXyJG5oDcvQhojF4mbgdVAKeK5VsviG-vsHCg',
+        'Authorization': 'Bearer '+token,
       },
       body: JSON.stringify({title, description, tag})
     });
@@ -52,7 +53,7 @@ const NoteState = (props) => {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzdmMWM3MjA5NjMwMzhjZjVkOTA4OWYiLCJpYXQiOjE2Njk1Mjk0MzAsImV4cCI6MTY2OTUzMzAzMH0.sbcxKGHXyJG5oDcvQhojF4mbgdVAKeK5VsviG-vsHCg',
+        'Authorization': 'Bearer ' + token,
       },
     });
     const json = await response.json()
@@ -70,7 +71,7 @@ const NoteState = (props) => {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzdmMWM3MjA5NjMwMzhjZjVkOTA4OWYiLCJpYXQiOjE2Njk1Mjk0MzAsImV4cCI6MTY2OTUzMzAzMH0.sbcxKGHXyJG5oDcvQhojF4mbgdVAKeK5VsviG-vsHCg',
+        'Authorization': 'Bearer ' + token,
       },
       body: JSON.stringify({title, description, tag})
     });
