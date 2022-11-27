@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import Database from "../src/db/db.js";
 import userRouter from "./routes/userRoute.js";
 import notesRouter from "./routes/notesRoute.js";
+import cors from 'cors'
 
 // dotenv configuration
 dotenv.config();
@@ -16,6 +17,7 @@ const port = parseInt(process.env.PORT);
 app.set("port", port);
 
 // Parsing middleware
+app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
