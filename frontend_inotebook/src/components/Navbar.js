@@ -7,9 +7,10 @@ const NavBar = () => {
     let location = useLocation()
     useEffect(() => {
     }, [location]);
+
     return (
-        <Navbar bg="light" expand="lg">
-            <Navbar.Brand as={Link} to="/">React-Bootstrap</Navbar.Brand>
+        <Navbar bg="dark" variant="dark" expand="lg" sticky='top'>
+            <Navbar.Brand as={Link} to="/">iNoteBook</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
@@ -23,10 +24,10 @@ const NavBar = () => {
                         className="me-2"
                         aria-label="Search"
                     />
-                    <Button variant="outline-success me-5">Search</Button>
-                    <Button variant="outline-success me-2" as={Link} to="/login" >Login</Button>
-                    <Button variant="outline-success me-5" as={Link} to="/signup">SignUp</Button>
+                    <Button variant="outline-light me-5">Search</Button>
                 </Form>
+                <Button variant="outline-light me-2" as={Link} to="/login" >Login</Button>
+                <Button variant="outline-light me-5" as={Link} to="/signup">SignUp</Button>
             </Navbar.Collapse>
         </Navbar>
     );

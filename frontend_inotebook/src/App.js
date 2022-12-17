@@ -7,13 +7,22 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import NoteState from './context/notes/NoteState';
 import { Container } from 'react-bootstrap';
+import Alert from './components/Alert';
+import alertContext from './context/alerts/alertContext'
+import { useContext } from 'react';
 
 function App() {
+
+  const context = useContext(alertContext)
+  
+  const { alert } = context
+
   return (
     <>
       <NoteState>
         <Router>
           <Navbar />
+          <Alert alert={alert}/>
           <Container>
             <Routes>
               <Route exact path="/" element={<Home />} />
